@@ -143,7 +143,18 @@ const App = () => {
     };
     fetch('http://localhost:5000/subscribe', requestOptions)
       .then(response => response.json())
-      .then(data => window.alert(data));
+      .then(data => window.alert('succesfully subscribed'));
+  }
+
+  const unsubscribe = async(e) => {
+    try{
+      await Subscriber.unsubscribe(
+        Beneficiary.address
+      );
+      window.alert('successfully unsubscribed');
+    } catch(err) {
+      window.alert(err.message);
+    }
   }
 
   const connect = async (e) => {
@@ -193,6 +204,7 @@ const App = () => {
         <Button onClick={fundEthSubscriber}>Fund Eth</Button>
         <Button onClick={fundSimp}>Fund Simp</Button>
         <Button onClick={subscribe}>Subscribe</Button>
+        <Button onClick={unsubscribe}>Unsubscribe</Button>
         <p>
           Subscribing to <span style={{color: "orange"}}>{Beneficiary.address}</span>
         </p><p>
